@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#2a1a0c"/>
+      <stop offset="100%" stop-color="#0c0a09"/>
+    </radialGradient>
+    <linearGradient id="text" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="55%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(249,115,22,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.8"/>
+
+  <g transform="translate(70,80)">
+    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#text)" stroke-width="2"/>
+    <text x="24" y="32" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-weight="800" font-size="18" fill="url(#text)">IH</text>
+    <text x="60" y="30" font-family="Inter, system-ui, sans-serif" font-size="16"
+          font-weight="600" fill="#f5f1ec" opacity="0.85">IGNACIO HEMMINGS</text>
+  </g>
+
+  <text x="70" y="340" font-family="Inter, system-ui, sans-serif"
+        font-size="84" font-weight="800" fill="url(#text)">Ignacio Hemmings</text>
+  <text x="70" y="430" font-family="Inter, system-ui, sans-serif"
+        font-size="84" font-weight="800" fill="url(#text)">Jiménez</text>
+
+  <text x="70" y="500" font-family="Geist Mono, ui-monospace, monospace"
+        font-size="28" font-weight="500" fill="#f5f1ec" opacity="0.9">
+    Junior full-stack developer and AI specialist.
+  </text>
+
+  <g transform="translate(70,550)" font-family="Inter, system-ui, sans-serif" font-size="18" fill="#f5f1ec" opacity="0.65">
+    <text>AI · Automation · Full-stack · Data</text>
+  </g>
+
+  <g transform="translate(1050,520)">
+    <circle cx="0" cy="0" r="80" fill="none" stroke="rgba(249,115,22,0.45)" stroke-width="1"/>
+    <circle cx="0" cy="0" r="55" fill="none" stroke="rgba(251,191,36,0.45)" stroke-width="1"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="rgba(20,184,166,0.45)" stroke-width="1"/>
+    <circle cx="0" cy="0" r="6" fill="#f97316"/>
+  </g>
+</svg>
