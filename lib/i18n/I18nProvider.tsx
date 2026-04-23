@@ -14,7 +14,7 @@ import { locales, type Locale } from "./dictionary";
 type I18nContextValue = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  toggleLocale: () => void;
+  toggleLocale: (next?: Locale) => void;
 };
 
 const I18nContext = createContext<I18nContextValue | null>(null);
@@ -49,7 +49,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     setLocaleState(next);
   }, []);
 
-  const toggleLocale = useCallback(() => {
+  const toggleLocale = useCallback((next?: Locale) => {
+    if (next) { setLocaleState(next); return; }
     setLocaleState((current) => (current === "en" ? "es" : "en"));
   }, []);
 
