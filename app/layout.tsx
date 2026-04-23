@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { NeuralBackground } from "@/components/effects/NeuralBackground";
@@ -190,6 +192,8 @@ export default function RootLayout({
           <main className="relative z-10">{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
+        <SpeedInsights />
         <Script
           id="ld-json-person"
           type="application/ld+json"
