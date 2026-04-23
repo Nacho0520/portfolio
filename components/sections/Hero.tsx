@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { TypingText } from "@/components/ui/TypingText";
 import { useI18n } from "@/lib/i18n/I18nProvider";
@@ -86,21 +86,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <motion.a
-        href="#about"
-        aria-label={dictionary.hero.scroll[locale]}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
-        onClick={() => play("click")}
-        data-cursor="interactive"
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-fg-base/50 hover:text-fg-base"
-      >
-        <div className="relative h-10 w-6 rounded-full border border-fg-base/20 p-1">
-          <span className="block h-2 w-1 animate-[scrollHint_1.8s_ease-in-out_infinite] rounded-full bg-fg-base/80 mx-auto" />
-        </div>
-        <ArrowDown className="h-3.5 w-3.5" />
-      </motion.a>
     </section>
   );
 }
