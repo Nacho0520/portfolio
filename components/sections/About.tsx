@@ -74,7 +74,6 @@ export function About() {
     <section id="about" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-4xl">
         <SectionHeading
-          eyebrow={locale === "es" ? "Sobre mí" : "About me"}
           title={<span className="text-gradient-neon">{d.heading[locale]}</span>}
         />
 

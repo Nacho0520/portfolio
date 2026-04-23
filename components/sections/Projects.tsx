@@ -2,30 +2,25 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Plus, X, Brain, Calendar, GraduationCap, Globe } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Plus, X, Brain, Calendar, GraduationCap, Globe, MonitorPlay } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pill } from "@/components/ui/Pill";
 import { Tooltip } from "@/components/ui/Tooltip";
 import { SkillIcon } from "@/components/ui/SkillIcon";
+import { LivePreview } from "@/components/ui/LivePreview";
 import { projects, skillCategories, type Project } from "@/lib/content";
 import { useI18n } from "@/lib/i18n/I18nProvider";
 import { dictionary } from "@/lib/i18n/dictionary";
 import { cn } from "@/lib/cn";
-import { LivePreview } from "@/components/ui/LivePreview";
 
 const iconFor = (key: string) => {
   switch (key) {
-    case "brain":
-      return <Brain className="h-7 w-7" />;
-    case "calendar":
-      return <Calendar className="h-7 w-7" />;
-    case "graduation-cap":
-      return <GraduationCap className="h-7 w-7" />;
-    case "globe":
-      return <Globe className="h-7 w-7" />;
-    default:
-      return <Brain className="h-7 w-7" />;
+    case "brain":          return <Brain className="h-7 w-7" />;
+    case "calendar":       return <Calendar className="h-7 w-7" />;
+    case "graduation-cap": return <GraduationCap className="h-7 w-7" />;
+    case "globe":          return <Globe className="h-7 w-7" />;
+    default:               return <Brain className="h-7 w-7" />;
   }
 };
 
@@ -40,13 +35,12 @@ function findSkill(id: string) {
 export function Projects() {
   const { locale } = useI18n();
   const d = dictionary.projects;
-  const [expanded, setExpanded] = useState<string | null>("dayclose");
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
     <section id="projects" data-cursor="web" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow={locale === "es" ? "Proyectos" : "Projects"}
           title={<span className="text-gradient-neon">{d.heading[locale]}</span>}
           lead={d.lead[locale]}
         />
@@ -84,14 +78,18 @@ function ProjectCard({
   locale: "en" | "es";
 }) {
   const d = dictionary.projects;
+  const hasDayClosePreview = project.id === "dayclose" && project.livePreview;
+
   return (
     <motion.article
+      layout
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.06 }}
       className={cn(
-        "spotlight glass group relative flex flex-col overflow-hidden rounded-3xl p-7 transition-transform duration-500 hover:-translate-y-1",
+        "spotlight glass group relative flex flex-col overflow-hidden rounded-3xl p-7",
+        "transition-[box-shadow,border-color] duration-500 hover:-translate-y-1",
         expanded && "md:col-span-2",
       )}
       onMouseMove={(e) => {
@@ -101,21 +99,18 @@ function ProjectCard({
         el.style.setProperty("--spot-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
       }}
     >
+      {/* Ambient glow */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(circle at 30% 20%, ${project.accent}22 0%, transparent 55%)`,
-        }}
+        style={{ background: `radial-gradient(circle at 30% 20%, ${project.accent}22 0%, transparent 55%)` }}
       />
 
+      {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div
           className="grid h-14 w-14 place-items-center rounded-2xl border border-fg-base/10 bg-fg-base/5"
-          style={{
-            color: project.accent,
-            boxShadow: `0 0 32px ${project.accent}22 inset`,
-          }}
+          style={{ color: project.accent, boxShadow: `0 0 32px ${project.accent}22 inset` }}
         >
           {iconFor(project.icon)}
         </div>
@@ -131,22 +126,22 @@ function ProjectCard({
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="interactive"
-                  className="inline-grid h-8 w-8 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-colors hover:border-fg-base/25 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
                   aria-label={d.viewRepo[locale]}
+                  className="inline-grid h-8 w-8 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-colors hover:border-fg-base/25 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
                 >
                   <GithubIcon className="h-3.5 w-3.5" />
                 </a>
               </Tooltip>
             )}
-            {project.links?.demo && (
+            {project.links?.demo && !hasDayClosePreview && (
               <Tooltip content={d.viewDemo[locale]}>
                 <a
                   href={project.links.demo}
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="interactive"
-                  className="inline-grid h-8 w-8 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-colors hover:border-fg-base/25 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
                   aria-label={d.viewDemo[locale]}
+                  className="inline-grid h-8 w-8 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-colors hover:border-fg-base/25 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
@@ -170,11 +165,7 @@ function ProjectCard({
             <Pill
               key={sid}
               color={skill?.brandColor}
-              icon={
-                skill ? (
-                  <SkillIcon name={skill.icon} className="h-3 w-3" />
-                ) : null
-              }
+              icon={skill ? <SkillIcon name={skill.icon} className="h-3 w-3" /> : null}
             >
               {skill?.label ?? sid}
             </Pill>
@@ -182,6 +173,35 @@ function ProjectCard({
         })}
       </div>
 
+      {/* DayClose special teaser */}
+      {hasDayClosePreview && !expanded && (
+        <motion.button
+          type="button"
+          onClick={onToggle}
+          data-cursor="interactive"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="group/preview mt-5 flex items-center justify-between gap-4 overflow-hidden rounded-2xl border border-accent-teal/30 bg-accent-teal/5 px-5 py-4 text-left transition-colors hover:border-accent-teal/60 hover:bg-accent-teal/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal/60"
+        >
+          <div className="flex items-center gap-3">
+            <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-xl border border-accent-teal/30 bg-accent-teal/10">
+              <MonitorPlay className="h-4 w-4 text-accent-teal-soft" />
+            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-semibold text-fg-base">
+                {locale === "es" ? "¿Quieres ver este proyecto?" : "Want to see this project?"}
+              </span>
+              <span className="text-xs text-fg-base/60">
+                {locale === "es" ? "Haz clic para ver la demo en vivo" : "Click to open the live preview"}
+              </span>
+            </div>
+          </div>
+          <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-accent-teal-soft transition-transform group-hover/preview:translate-x-0.5 group-hover/preview:-translate-y-0.5" />
+        </motion.button>
+      )}
+
+      {/* Expanded content */}
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
@@ -204,7 +224,8 @@ function ProjectCard({
         )}
       </AnimatePresence>
 
-      <div className="mt-6 flex items-center justify-between">
+      {/* Footer row */}
+      <div className="mt-auto flex items-center justify-between pt-5">
         <button
           type="button"
           onClick={onToggle}
@@ -213,13 +234,9 @@ function ProjectCard({
           aria-expanded={expanded}
         >
           {expanded ? (
-            <>
-              <X className="h-3.5 w-3.5" /> {d.collapse[locale]}
-            </>
+            <><X className="h-3.5 w-3.5" /> {d.collapse[locale]}</>
           ) : (
-            <>
-              <Plus className="h-3.5 w-3.5" /> {d.expand[locale]}
-            </>
+            <><Plus className="h-3.5 w-3.5" /> {d.expand[locale]}</>
           )}
         </button>
         <ArrowUpRight className="h-4 w-4 text-fg-base/30 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-fg-base" />

@@ -53,9 +53,17 @@ export function Navbar() {
     return () => obs.disconnect();
   }, []);
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute("href");
+    if (!href?.startsWith("#")) return;
+    e.preventDefault();
     play("click");
     setOpen(false);
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    const navH = 80;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
@@ -99,7 +107,7 @@ export function Navbar() {
               {active === s.id && (
                 <motion.span
                   layoutId="nav-active"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 32, mass: 0.6 }}
                   className="absolute inset-0 -z-10 rounded-full bg-fg-base/10"
                 />
               )}

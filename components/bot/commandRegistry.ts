@@ -1,4 +1,4 @@
-import { contact, projects, skillCategories, timeline } from "@/lib/content";
+import { contact, projects, skillCategories, workTimeline, educationTimeline, type TimelineEntry } from "@/lib/content";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
 
 export type BotLine = {
@@ -71,19 +71,15 @@ const commands: Record<string, CommandHandler> = {
       text: `• ${p.title} — ${p.short[locale]}`,
     })),
   experience: ({ locale }) =>
-    timeline
-      .filter((t) => t.kind !== "education")
-      .map<BotLine>((t) => ({
-        kind: "bot",
-        text: `• ${t.title[locale]} @ ${t.org} (${t.period[locale]})`,
-      })),
+    workTimeline.map<BotLine>((t: TimelineEntry) => ({
+      kind: "bot",
+      text: `• ${t.title[locale]} @ ${t.org} (${t.period[locale]})`,
+    })),
   education: ({ locale }) =>
-    timeline
-      .filter((t) => t.kind === "education")
-      .map<BotLine>((t) => ({
-        kind: "bot",
-        text: `• ${t.title[locale]} @ ${t.org} (${t.period[locale]})`,
-      })),
+    educationTimeline.map<BotLine>((t: TimelineEntry) => ({
+      kind: "bot",
+      text: `• ${t.title[locale]} @ ${t.org} (${t.period[locale]})`,
+    })),
   contact: ({ locale }) => [
     { kind: "bot", text: dictionary.bot.contactSummary[locale] },
     { kind: "link", text: `LinkedIn → ${contact.linkedin}`, href: contact.linkedin },

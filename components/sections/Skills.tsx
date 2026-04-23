@@ -25,27 +25,27 @@ export function Skills() {
     <section id="skills" data-cursor="ai" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow={locale === "es" ? "Stack" : "Stack"}
           title={<span className="text-gradient-neon">{d.heading[locale]}</span>}
           lead={d.lead[locale]}
         />
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories.map((cat, idx) => {
-            const meta = categoryMeta[cat.id];
-            const Icon = meta.icon;
-            return (
-              <motion.div
-                key={cat.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.55, delay: idx * 0.08 }}
-                className={cn(cat.id === "ai" && "lg:col-span-2")}
-              >
-                <SpotlightCard className="h-full">
-                  <div className="mb-5 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+        {/* Row 1 — Coding languages: full width so all 7 chips sit comfortably */}
+        <div className="mb-5">
+          {skillCategories
+            .filter((c) => c.id === "code")
+            .map((cat, idx) => {
+              const meta = categoryMeta[cat.id];
+              const Icon = meta.icon;
+              return (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.55, delay: idx * 0.08 }}
+                >
+                  <SpotlightCard>
+                    <div className="mb-5 flex items-center gap-3">
                       <span
                         className="grid h-10 w-10 place-items-center rounded-xl border border-fg-base/10 bg-fg-base/5"
                         style={{ boxShadow: `0 0 24px ${meta.accent}33 inset` }}
@@ -56,20 +56,63 @@ export function Skills() {
                         {d.categories[cat.id][locale]}
                       </h3>
                     </div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-fg-base/60">
-                      0{idx + 1}
-                    </span>
-                  </div>
+                    {/* 4 cols on mobile → 7 on sm+ so all chips fit in one row */}
+                    <div className="grid grid-cols-4 gap-3 sm:grid-cols-7">
+                      {cat.items.map((item, i) => (
+                        <SkillChip key={item.id} item={item} index={i} />
+                      ))}
+                    </div>
+                  </SpotlightCard>
+                </motion.div>
+              );
+            })}
+        </div>
 
-                  <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-                    {cat.items.map((item, i) => (
-                      <SkillChip key={item.id} item={item} index={i} />
-                    ))}
-                  </div>
-                </SpotlightCard>
-              </motion.div>
-            );
-          })}
+        {/* Row 2 — AI (wider) + Data side by side */}
+        <div className="grid gap-5 lg:grid-cols-3">
+          {skillCategories
+            .filter((c) => c.id !== "code")
+            .map((cat, idx) => {
+              const meta = categoryMeta[cat.id];
+              const Icon = meta.icon;
+              return (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.55, delay: (idx + 1) * 0.08 }}
+                  className={cn(cat.id === "ai" && "lg:col-span-2")}
+                >
+                  <SpotlightCard className="h-full">
+                    <div className="mb-5 flex items-center gap-3">
+                      <span
+                        className="grid h-10 w-10 place-items-center rounded-xl border border-fg-base/10 bg-fg-base/5"
+                        style={{ boxShadow: `0 0 24px ${meta.accent}33 inset` }}
+                      >
+                        <Icon className="h-5 w-5" style={{ color: meta.accent }} />
+                      </span>
+                      <h3 className="text-lg font-semibold tracking-tight">
+                        {d.categories[cat.id][locale]}
+                      </h3>
+                    </div>
+                    {/* AI (5 items, wide card) → 5 cols; Data (4 items, narrow) → 2 cols */}
+                    <div
+                      className={cn(
+                        "grid gap-3",
+                        cat.id === "ai"
+                          ? "grid-cols-3 sm:grid-cols-5"
+                          : "grid-cols-2 sm:grid-cols-4",
+                      )}
+                    >
+                      {cat.items.map((item, i) => (
+                        <SkillChip key={item.id} item={item} index={i} />
+                      ))}
+                    </div>
+                  </SpotlightCard>
+                </motion.div>
+              );
+            })}
         </div>
       </div>
     </section>

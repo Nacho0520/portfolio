@@ -21,7 +21,6 @@ export function Contact() {
     <section id="contact" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow={locale === "es" ? "Hablemos" : "Let's talk"}
           title={<span className="text-gradient-neon">{d.heading[locale]}</span>}
           lead={d.lead[locale]}
         />
@@ -32,7 +31,7 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="glass flex flex-col justify-between rounded-3xl p-7 md:p-8"
+            className="glass flex flex-col rounded-3xl p-7 md:p-8"
           >
             <div>
               <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-fg-base/60">
@@ -63,8 +62,15 @@ export function Contact() {
                 <ContactRow
                   icon={<LinkedinIcon className="h-5 w-5" />}
                   label={d.linkedinLabel[locale]}
-                  value="linkedin.com/in/ignacio-hemmings"
+                  value="linkedin.com/in/ignaciohemmings"
                   href={contact.linkedin}
+                  external
+                />
+                <ContactRow
+                  icon={<GithubIcon className="h-5 w-5" />}
+                  label={d.githubLabel[locale]}
+                  value="github.com/Nacho0520"
+                  href={contact.github}
                   external
                 />
                 <ContactRow
@@ -75,58 +81,6 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center gap-3">
-              <Tooltip content="LinkedIn">
-                <a
-                  href={contact.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cursor="interactive"
-                  data-magnetic
-                  aria-label="LinkedIn"
-                  className="group grid h-11 w-11 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-all hover:scale-110 hover:border-neon-violet/60 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60"
-                >
-                  <LinkedinIcon className="h-4 w-4 transition-transform group-hover:scale-110" />
-                </a>
-              </Tooltip>
-              <Tooltip content="GitHub">
-                <a
-                  href={contact.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cursor="interactive"
-                  data-magnetic
-                  aria-label="GitHub"
-                  className="group grid h-11 w-11 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-all hover:scale-110 hover:border-neon-blue/60 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60"
-                >
-                  <GithubIcon className="h-4 w-4 transition-transform group-hover:scale-110" />
-                </a>
-              </Tooltip>
-              <Tooltip content={d.whatsappLabel[locale]}>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cursor="interactive"
-                  data-magnetic
-                  aria-label={d.whatsappLabel[locale]}
-                  className="group grid h-11 w-11 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-all hover:scale-110 hover:border-[#25D366]/70 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60"
-                >
-                  <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" />
-                </a>
-              </Tooltip>
-              <Tooltip content={d.emailLabel[locale]}>
-                <a
-                  href={`mailto:${contact.email}`}
-                  data-cursor="interactive"
-                  data-magnetic
-                  aria-label={d.emailLabel[locale]}
-                  className="group grid h-11 w-11 place-items-center rounded-full border border-fg-base/10 bg-fg-base/5 text-fg-base/75 transition-all hover:scale-110 hover:border-accent-orange/70 hover:text-fg-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-violet/60"
-                >
-                  <Mail className="h-4 w-4 transition-transform group-hover:scale-110" />
-                </a>
-              </Tooltip>
-            </div>
           </motion.div>
 
           <motion.div

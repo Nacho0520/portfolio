@@ -197,53 +197,149 @@ export type TimelineEntry = {
   title: { en: string; es: string };
   org: string;
   description: { en: string; es: string };
+  bullets?: { en: string[]; es: string[] };
   stack?: string[];
 };
 
-export const timeline: TimelineEntry[] = [
+export const educationTimeline: TimelineEntry[] = [
   {
     id: "uog",
     kind: "education",
-    period: { en: "2023 – December 2026", es: "2023 – Diciembre 2026" },
-    title: { en: "BSc Computing and Entrepreneurship", es: "BSc Computing and Entrepreneurship" },
+    period: { en: "2023 – Dec 2026", es: "2023 – Dic 2026" },
+    title: { en: "BSc Computing & Entrepreneurship", es: "BSc Computing & Entrepreneurship" },
     org: "University of Gibraltar",
     description: {
-      en: "Degree combining software engineering foundations with entrepreneurship, innovation management and product thinking.",
-      es: "Grado que combina fundamentos de ingeniería de software con emprendimiento, gestión de la innovación y pensamiento de producto.",
+      en: "Degree blending software engineering with entrepreneurship, product thinking and innovation management. Hands-on projects from day one.",
+      es: "Grado que combina ingeniería de software con emprendimiento, pensamiento de producto y gestión de la innovación. Proyectos prácticos desde el primer día.",
+    },
+    bullets: {
+      en: [
+        "Software Engineering & Architecture",
+        "Web & Full-stack Development",
+        "Databases & SQL",
+        "Algorithms & Data Structures",
+        "AI & Machine Learning fundamentals",
+        "Entrepreneurship & Business Strategy",
+        "Project Management & Agile",
+      ],
+      es: [
+        "Ingeniería y Arquitectura de Software",
+        "Desarrollo Web y Full-stack",
+        "Bases de Datos y SQL",
+        "Algoritmos y Estructuras de Datos",
+        "Fundamentos de IA y Machine Learning",
+        "Emprendimiento y Estrategia Empresarial",
+        "Gestión de Proyectos y Metodologías Ágiles",
+      ],
     },
   },
   {
+    id: "guadalete",
+    kind: "education",
+    period: { en: "2021 – 2023", es: "2021 – 2023" },
+    title: {
+      en: "Technological Baccalaureate",
+      es: "Bachillerato Tecnológico",
+    },
+    org: "Colegio Privado Guadalete",
+    description: {
+      en: "Spanish Technological Baccalaureate with a STEM focus. Strong foundation in mathematics, physics and computing that directly feeds into my software career.",
+      es: "Bachillerato Tecnológico con enfoque STEM. Sólida base en matemáticas, física e informática que alimenta directamente mi carrera en software.",
+    },
+    bullets: {
+      en: [
+        "Mathematics II (Calculus, Linear Algebra)",
+        "Physics",
+        "Technical Drawing II (3D visualisation)",
+        "Industrial Technology II",
+        "ICT & Information Systems",
+        "Chemistry",
+      ],
+      es: [
+        "Matemáticas II (Cálculo, Álgebra Lineal)",
+        "Física",
+        "Dibujo Técnico II (visualización 3D)",
+        "Tecnología Industrial II",
+        "TIC y Sistemas de Información",
+        "Química",
+      ],
+    },
+  },
+];
+
+export const workTimeline: TimelineEntry[] = [
+  {
     id: "bet365",
     kind: "work",
-    period: { en: "University Internship", es: "Prácticas universitarias" },
+    period: { en: "Mar 2026 – Apr 2026", es: "Mar 2026 – Abr 2026" },
     title: { en: "CRM Data & Segmentation Intern", es: "Prácticas CRM – Datos y Segmentación" },
     org: "Bet365",
     description: {
-      en: "Supporting global CRM operations with BigQuery, R and Optimove for data extraction and customer segmentation.",
-      es: "Apoyo a las operaciones CRM globales utilizando BigQuery, R y Optimove para la extracción de datos y segmentación de clientes.",
+      en: "University placement supporting global CRM operations across UK, Spain, LATAM and Brazil — collaborating with CRM Analytics, Gaming and Brand Marketing teams.",
+      es: "Prácticas universitarias de apoyo a operaciones CRM globales en UK, España, LATAM y Brasil — colaborando con los equipos de CRM Analytics, Gaming y Brand Marketing.",
     },
-    stack: ["bigquery", "r", "optimove"],
+    bullets: {
+      en: [
+        "Used BigQuery and R for data extraction and high-level reporting via MicroStrategy",
+        "Executed customer segmentation in Optimove to drive acquisition and reactivate churned users",
+        "Designed targeting filters for campaigns across multiple markets",
+        "Proactively identified CRM workflow bottlenecks to ensure seamless campaign delivery",
+      ],
+      es: [
+        "BigQuery y R para extracción de datos y reporting de alto nivel vía MicroStrategy",
+        "Segmentación de clientes en Optimove para adquisición y reactivación de usuarios perdidos",
+        "Diseño de filtros de targeting para campañas en múltiples mercados",
+        "Identificación proactiva de cuellos de botella en flujos CRM para asegurar entregas sin fricción",
+      ],
+    },
+    stack: ["bigquery", "r", "optimove", "microstrategy"],
   },
   {
     id: "concert",
     kind: "leadership",
-    period: { en: "Summer seasons", es: "Temporadas de verano" },
-    title: { en: "Crowd Control & Operations", es: "Control de multitudes y operaciones" },
+    period: { en: "Summer 2025", es: "Verano 2025" },
+    title: { en: "Event Staff", es: "Staff de Evento" },
     org: "Concert Music Festival",
     description: {
-      en: "Crowd control and operations management for events with 10,000+ attendees, coordinating teams under high-pressure situations.",
-      es: "Control de multitudes y gestión de operaciones en eventos con más de 10.000 asistentes, coordinando equipos en situaciones de alta presión.",
+      en: "Access control and crowd management for a high-capacity outdoor music festival with 10,000+ daily attendees.",
+      es: "Control de accesos y gestión de multitudes en un festival de música al aire libre con más de 10.000 asistentes diarios.",
+    },
+    bullets: {
+      en: [
+        "Coordinated crowd flow and access control at peak capacity",
+        "Managed VIP area logistics and point-of-sale (POS) transactions",
+        "Resolved real-time incidents through proactive communication under pressure",
+        "Maintained high-standard customer service throughout the event",
+      ],
+      es: [
+        "Coordinación del flujo de público y control de accesos en horas punta",
+        "Gestión del área VIP y transacciones en punto de venta (POS)",
+        "Resolución de incidencias en tiempo real con comunicación proactiva bajo presión",
+        "Mantenimiento de altos estándares de atención al cliente durante el evento",
+      ],
     },
   },
   {
     id: "piscina",
     kind: "leadership",
-    period: { en: "Seasonal", es: "Temporal" },
-    title: { en: "Bar Manager", es: "Bar Manager" },
-    org: "Pizzería Piscina",
+    period: { en: "Summer 2025", es: "Verano 2025" },
+    title: { en: "Waiter & Bar Manager", es: "Camarero y Bar Manager" },
+    org: "La Piscina – Pizza & Copas",
     description: {
-      en: "Managing operations under pressure as Bar Manager: staff, stock, cash control and customer experience.",
-      es: "Gestión de operaciones bajo presión como Bar Manager: equipo, stock, control de caja y experiencia del cliente.",
+      en: "Bar and floor operations at a busy seasonal restaurant during peak summer season.",
+      es: "Operaciones de barra y sala en un restaurante de temporada concurrido durante el pico estival.",
+    },
+    bullets: {
+      en: [
+        "Managed bar operations and stock control throughout peak season",
+        "Delivered efficient customer service under high-pressure conditions",
+        "Coordinated team workflows to maintain service quality and speed",
+      ],
+      es: [
+        "Gestión de operaciones de barra y control de stock en temporada alta",
+        "Servicio al cliente eficiente bajo condiciones de alta presión",
+        "Coordinación del equipo para mantener calidad y velocidad de servicio",
+      ],
     },
   },
 ];
@@ -253,9 +349,9 @@ export const contact = {
   phone: "+34 622 33 96 28",
   phoneE164: "+34622339628",
   whatsappNumber: "34622339628",
-  locations: ["Chiclana de la Frontera", "La Línea de la Concepción"],
-  linkedin: "https://www.linkedin.com/in/ignacio-hemmings/",
-  github: "https://github.com/",
+  locations: ["Chiclana de la Frontera", "Gibraltar"],
+  linkedin: "https://www.linkedin.com/in/ignaciohemmings/",
+  github: "https://github.com/Nacho0520",
 };
 
 export type ServiceId = "web" | "automation" | "chatbot";

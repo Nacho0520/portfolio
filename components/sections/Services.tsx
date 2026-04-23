@@ -30,7 +30,6 @@ export function Services() {
     <section id="services" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow={d.eyebrow[locale]}
           title={<span className="text-gradient-neon">{d.heading[locale]}</span>}
           lead={d.lead[locale]}
         />

@@ -134,7 +134,7 @@ const jsonLd = {
     name: "Bet365",
   },
   sameAs: [
-    "https://www.linkedin.com/in/ignacio-hemmings/",
+    "https://www.linkedin.com/in/ignaciohemmings/",
     "https://dayclose.vercel.app",
   ],
   knowsAbout: [

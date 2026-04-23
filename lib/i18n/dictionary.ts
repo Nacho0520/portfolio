@@ -142,10 +142,10 @@ export const dictionary = {
     },
   },
   experience: {
-    heading: { en: "Experience & Education", es: "Experiencia y Educación" },
+    heading: { en: "Trayectoria", es: "Trayectoria" },
     lead: {
-      en: "A timeline connecting academic, technical and leadership work.",
-      es: "Una línea de tiempo que conecta lo académico, técnico y de liderazgo.",
+      en: "Academic background and professional experience — side by side.",
+      es: "Formación académica y experiencia profesional — una junto a la otra.",
     },
     featured: {
       en: "Featured environments",
@@ -169,6 +169,7 @@ export const dictionary = {
     phoneLabel: { en: "Phone", es: "Teléfono" },
     whatsappLabel: { en: "WhatsApp", es: "WhatsApp" },
     linkedinLabel: { en: "LinkedIn", es: "LinkedIn" },
+    githubLabel: { en: "GitHub", es: "GitHub" },
     terminalTitle: { en: "Ignacio-Bot — interactive terminal", es: "Ignacio-Bot — terminal interactiva" },
     terminalHint: {
       en: "Type 'help' to list available commands.",

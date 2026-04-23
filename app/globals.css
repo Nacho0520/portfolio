@@ -345,6 +345,22 @@ body {
   background: linear-gradient(120deg, var(--keyword-bg-start-hover) 0%, var(--keyword-bg-end-hover) 100%);
 }
 
+/* UoG logo — white PNG, invert in light mode */
+.uog-logo {
+  filter: brightness(0) invert(1);   /* white on dark */
+}
+[data-theme="light"] .uog-logo {
+  filter: brightness(0);              /* black on light */
+}
+
+/* Piscina logo — black PNG, invert in dark mode */
+.piscina-logo {
+  filter: brightness(0) invert(1);   /* white on dark */
+}
+[data-theme="light"] .piscina-logo {
+  filter: none;                       /* original black on light */
+}
+
 /* Neural background — layered elements with per-theme intensity */
 .neural-grid {
   opacity: 0.7;
