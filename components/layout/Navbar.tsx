@@ -14,6 +14,7 @@ const sections = [
   { id: "hero", key: "hero" as const },
   { id: "about", key: "about" as const },
   { id: "services", key: "services" as const },
+  { id: "skills", key: "skills" as const },
   { id: "projects", key: "projects" as const },
   { id: "experience", key: "experience" as const },
   { id: "contact", key: "contact" as const },
@@ -100,7 +101,7 @@ export function Navbar() {
               onClick={handleNavClick}
               data-cursor="interactive"
               className={cn(
-                "relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+                "relative rounded-full px-2.5 py-1.5 text-sm font-medium transition-colors",
                 active === s.id ? "text-fg-base" : "text-fg-base/60 hover:text-fg-base",
               )}
             >

@@ -114,6 +114,17 @@ export type Project = {
   kind: { en: string; es: string };
   short: { en: string; es: string };
   long: { en: string; es: string };
+  caseStudy: {
+    problem: { en: string; es: string };
+    role: { en: string; es: string };
+    approach: { en: string; es: string };
+    challenge: { en: string; es: string };
+    impact: { en: string; es: string };
+  };
+  metrics: Array<{
+    value: string;
+    label: { en: string; es: string };
+  }>;
   stack: string[];
   icon: string;
   links?: { github?: string; demo?: string };
@@ -134,6 +145,33 @@ export const projects: Project[] = [
       en: "Local AI solution to analyze and classify CVs privately, structured as a B2B product to optimize data privacy and processing efficiency. Runs on-prem with vector retrieval, keeping candidate data off the cloud.",
       es: "Solución de IA local para analizar y clasificar currículums de forma privada, estructurada como un producto B2B para optimizar la privacidad de los datos y la eficiencia. Corre on-prem con búsqueda vectorial, manteniendo los datos de candidatos fuera de la nube.",
     },
+    caseStudy: {
+      problem: {
+        en: "Recruiting teams often need to review large volumes of CVs while keeping candidate data private.",
+        es: "Los equipos de selección necesitan revisar grandes volúmenes de CVs manteniendo la privacidad de los datos de candidatos.",
+      },
+      role: {
+        en: "AI product builder: designed the workflow, classification logic and B2B positioning.",
+        es: "Constructor de producto IA: diseño del flujo, lógica de clasificación y posicionamiento B2B.",
+      },
+      approach: {
+        en: "Built a local-first assistant with structured parsing, prompt design and retrieval logic to keep sensitive files off external platforms.",
+        es: "Construcción de un asistente local-first con parsing estructurado, diseño de prompts y lógica de recuperación para mantener archivos sensibles fuera de plataformas externas.",
+      },
+      challenge: {
+        en: "Balancing useful AI analysis with privacy constraints and repeatable output formats.",
+        es: "Equilibrar análisis útil con IA, restricciones de privacidad y formatos de salida repetibles.",
+      },
+      impact: {
+        en: "Demonstrates a privacy-first AI workflow that can be adapted to HR and department-level screening.",
+        es: "Demuestra un flujo de IA centrado en privacidad adaptable a RRHH y cribado por departamentos.",
+      },
+    },
+    metrics: [
+      { value: "100%", label: { en: "local-first", es: "local-first" } },
+      { value: "B2B", label: { en: "product framing", es: "enfoque producto" } },
+      { value: "AI", label: { en: "classification", es: "clasificación" } },
+    ],
     stack: ["python", "llm", "prompt", "flowise"],
     icon: "brain",
     accent: "#f97316",
@@ -150,6 +188,33 @@ export const projects: Project[] = [
       en: "Independently built web application to manage daily habits. Ownership of the full development cycle, from frontend architecture to deployment on Vercel.",
       es: "Aplicación web de creación independiente para gestionar hábitos diarios. Gestión de todo el ciclo de desarrollo, desde la arquitectura frontend hasta el despliegue en Vercel.",
     },
+    caseStudy: {
+      problem: {
+        en: "Habit tools can feel cluttered or overbuilt, making daily consistency harder instead of easier.",
+        es: "Muchas herramientas de hábitos se sienten saturadas o demasiado complejas, dificultando la constancia diaria en lugar de facilitarla.",
+      },
+      role: {
+        en: "Solo full-cycle developer: product idea, frontend architecture, UI decisions and deployment.",
+        es: "Desarrollador integral en solitario: idea de producto, arquitectura frontend, decisiones UI y despliegue.",
+      },
+      approach: {
+        en: "Designed a focused web app around daily check-ins, simple navigation and a lightweight React implementation deployed on Vercel.",
+        es: "Diseño de una app web enfocada en check-ins diarios, navegación simple e implementación ligera en React desplegada en Vercel.",
+      },
+      challenge: {
+        en: "Keeping the experience simple while still making the product useful enough for real daily use.",
+        es: "Mantener la experiencia simple sin perder utilidad real para uso diario.",
+      },
+      impact: {
+        en: "Live public product that shows ownership from concept to deployment and can be tested directly inside the portfolio.",
+        es: "Producto público en vivo que demuestra ownership desde el concepto hasta el despliegue y puede probarse dentro del portfolio.",
+      },
+    },
+    metrics: [
+      { value: "Live", label: { en: "public app", es: "app pública" } },
+      { value: "100%", label: { en: "solo-built", es: "desarrollo propio" } },
+      { value: "Vercel", label: { en: "deployed", es: "desplegada" } },
+    ],
     stack: ["react", "javascript", "css"],
     icon: "calendar",
     accent: "#14b8a6",
@@ -168,6 +233,33 @@ export const projects: Project[] = [
       en: "Learning management system inspired by Canvas/Google Classroom, built with PHP, MySQL and JavaScript. Student and teacher interfaces with automated assignment management.",
       es: "Sistema de gestión de aprendizaje inspirado en Canvas/Google Classroom utilizando PHP, MySQL y JavaScript. Interfaces para estudiantes y profesores con gestión de tareas automatizada.",
     },
+    caseStudy: {
+      problem: {
+        en: "Students and teachers need separate workflows for assignments, feedback and course visibility.",
+        es: "Estudiantes y profesores necesitan flujos diferenciados para tareas, feedback y visibilidad del curso.",
+      },
+      role: {
+        en: "Full-stack developer responsible for database structure, PHP logic and JavaScript interactions.",
+        es: "Desarrollador full-stack responsable de la estructura de base de datos, lógica PHP e interacciones JavaScript.",
+      },
+      approach: {
+        en: "Modeled the platform around role-based interfaces with MySQL-backed content and task management.",
+        es: "Modelado de la plataforma alrededor de interfaces por rol con contenido y gestión de tareas respaldados por MySQL.",
+      },
+      challenge: {
+        en: "Designing a clear separation between student and teacher features while keeping the code maintainable.",
+        es: "Diseñar una separación clara entre funciones de estudiante y profesor manteniendo el código mantenible.",
+      },
+      impact: {
+        en: "Academic full-stack project demonstrating CRUD workflows, relational data and role-based UX.",
+        es: "Proyecto académico full-stack que demuestra flujos CRUD, datos relacionales y UX basada en roles.",
+      },
+    },
+    metrics: [
+      { value: "2", label: { en: "user roles", es: "roles de usuario" } },
+      { value: "CRUD", label: { en: "workflows", es: "flujos" } },
+      { value: "MySQL", label: { en: "database", es: "base de datos" } },
+    ],
     stack: ["php", "mysql", "javascript", "html", "css"],
     icon: "graduation-cap",
     accent: "#fbbf24",
@@ -184,6 +276,33 @@ export const projects: Project[] = [
       en: "Development of multiple websites from scratch managing both front-end and back-end. Emphasis on responsive design, SEO-friendly architecture and maintainable code.",
       es: "Desarrollo de múltiples sitios web desde cero gestionando tanto front-end como back-end. Énfasis en diseño responsive, arquitectura amigable con SEO y código mantenible.",
     },
+    caseStudy: {
+      problem: {
+        en: "Small projects and university modules needed complete websites with frontend, backend and maintainable structure.",
+        es: "Proyectos pequeños y módulos universitarios necesitaban webs completas con frontend, backend y estructura mantenible.",
+      },
+      role: {
+        en: "Full-stack implementer handling layout, responsive UI, backend logic and database integration.",
+        es: "Implementador full-stack gestionando layout, UI responsive, lógica backend e integración con base de datos.",
+      },
+      approach: {
+        en: "Built websites from scratch using HTML, CSS, JavaScript, PHP and MySQL with emphasis on clarity and maintainability.",
+        es: "Construcción de webs desde cero con HTML, CSS, JavaScript, PHP y MySQL priorizando claridad y mantenibilidad.",
+      },
+      challenge: {
+        en: "Connecting design decisions with working backend flows while keeping projects easy to extend.",
+        es: "Conectar decisiones de diseño con flujos backend funcionales manteniendo proyectos fáciles de ampliar.",
+      },
+      impact: {
+        en: "Shows practical breadth across frontend, backend and database fundamentals.",
+        es: "Muestra amplitud práctica en fundamentos de frontend, backend y bases de datos.",
+      },
+    },
+    metrics: [
+      { value: "Full-stack", label: { en: "ownership", es: "ownership" } },
+      { value: "Responsive", label: { en: "layouts", es: "layouts" } },
+      { value: "SEO", label: { en: "aware", es: "consciente" } },
+    ],
     stack: ["html", "css", "javascript", "php", "mysql"],
     icon: "globe",
     accent: "#fb7185",
@@ -197,6 +316,10 @@ export type TimelineEntry = {
   title: { en: string; es: string };
   org: string;
   description: { en: string; es: string };
+  metrics?: Array<{
+    value: string;
+    label: { en: string; es: string };
+  }>;
   bullets?: { en: string[]; es: string[] };
   stack?: string[];
 };
@@ -292,6 +415,11 @@ export const workTimeline: TimelineEntry[] = [
         "Identificación proactiva de cuellos de botella en flujos CRM para asegurar entregas sin fricción",
       ],
     },
+    metrics: [
+      { value: "4", label: { en: "markets supported", es: "mercados apoyados" } },
+      { value: "3", label: { en: "CRM teams", es: "equipos CRM" } },
+      { value: "4", label: { en: "data tools", es: "herramientas data" } },
+    ],
     stack: ["bigquery", "r", "optimove", "microstrategy"],
   },
   {
@@ -318,6 +446,11 @@ export const workTimeline: TimelineEntry[] = [
         "Mantenimiento de altos estándares de atención al cliente durante el evento",
       ],
     },
+    metrics: [
+      { value: "10k+", label: { en: "daily attendees", es: "asistentes diarios" } },
+      { value: "VIP", label: { en: "area logistics", es: "logística de área" } },
+      { value: "POS", label: { en: "transactions", es: "transacciones" } },
+    ],
   },
   {
     id: "piscina",
@@ -341,6 +474,11 @@ export const workTimeline: TimelineEntry[] = [
         "Coordinación del equipo para mantener calidad y velocidad de servicio",
       ],
     },
+    metrics: [
+      { value: "Peak", label: { en: "summer season", es: "temporada alta" } },
+      { value: "Bar", label: { en: "operations", es: "operaciones" } },
+      { value: "Stock", label: { en: "control", es: "control" } },
+    ],
   },
 ];
 

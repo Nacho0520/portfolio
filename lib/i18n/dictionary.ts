@@ -136,6 +136,13 @@ export const dictionary = {
     viewDemo: { en: "Open demo", es: "Abrir demo" },
     livePreview: { en: "Live preview", es: "Vista en vivo" },
     openFull: { en: "Open full app", es: "Abrir app completa" },
+    caseStudy: { en: "Mini case study", es: "Mini caso de estudio" },
+    metrics: { en: "Signals", es: "Señales" },
+    problem: { en: "Problem", es: "Problema" },
+    role: { en: "Role", es: "Rol" },
+    approach: { en: "Approach", es: "Enfoque" },
+    challenge: { en: "Challenge", es: "Reto" },
+    impact: { en: "Impact", es: "Impacto" },
     previewNotice: {
       en: "Preview mode — interact freely, but sign-up and account creation are disabled here. Open the full app to create your account.",
       es: "Modo preview — interactúa libremente, pero el registro y la creación de cuentas están desactivados aquí. Abre la app completa para crear tu cuenta.",
@@ -156,6 +163,46 @@ export const dictionary = {
       work: { en: "Work", es: "Experiencia" },
       leadership: { en: "Leadership", es: "Liderazgo" },
     },
+  },
+  proof: {
+    heading: { en: "Signals of trust", es: "Señales de confianza" },
+    lead: {
+      en: "Real proof points instead of inflated claims: public work, live products and recognised environments.",
+      es: "Pruebas reales en lugar de promesas infladas: trabajo público, productos en vivo y entornos reconocidos.",
+    },
+    github: {
+      title: { en: "Public GitHub", es: "GitHub público" },
+      body: {
+        en: "Open repositories show practical JavaScript, TypeScript, Svelte and web projects.",
+        es: "Repositorios abiertos que muestran práctica real con JavaScript, TypeScript, Svelte y proyectos web.",
+      },
+      metric: { en: "7 public repos", es: "7 repos públicos" },
+    },
+    dayclose: {
+      title: { en: "Live product", es: "Producto en vivo" },
+      body: {
+        en: "DayClose is deployed and available to test, showing ownership from idea to production.",
+        es: "DayClose está desplegado y disponible para probar, demostrando ownership desde idea hasta producción.",
+      },
+      metric: { en: "Live on Vercel", es: "Live en Vercel" },
+    },
+    cv: {
+      title: { en: "Verified CV", es: "CV verificable" },
+      body: {
+        en: "The portfolio is aligned with the attached CV: education, experience, contact and skills.",
+        es: "El portfolio está alineado con el CV adjunto: educación, experiencia, contacto y habilidades.",
+      },
+      metric: { en: "Downloadable PDF", es: "PDF descargable" },
+    },
+    environments: {
+      title: { en: "Recognised environments", es: "Entornos reconocidos" },
+      body: {
+        en: "Academic and professional context across University of Gibraltar and Bet365.",
+        es: "Contexto académico y profesional entre University of Gibraltar y Bet365.",
+      },
+      metric: { en: "University + CRM data", es: "Universidad + CRM data" },
+    },
+    open: { en: "Open", es: "Abrir" },
   },
   contact: {
     heading: { en: "Contact", es: "Contacto" },
@@ -219,8 +266,8 @@ export const dictionary = {
   },
   bot: {
     welcome: {
-      en: "> Hi, I am Ignacio's interactive terminal. Type 'contact', 'download_cv' or ask me anything about his experience.",
-      es: "> Hola, soy la terminal interactiva de Ignacio. Escribe 'contactar', 'descargar_cv' o hazme una pregunta sobre su experiencia.",
+      en: "> Hi, I am Ignacio-Bot. Ask about Bet365, DayClose, skills, case studies or request a project estimate.",
+      es: "> Hola, soy Ignacio-Bot. Pregúntame por Bet365, DayClose, habilidades, casos de estudio o pide un presupuesto.",
     },
     placeholder: { en: "Type a command or a question…", es: "Escribe un comando o una pregunta…" },
     unknown: {

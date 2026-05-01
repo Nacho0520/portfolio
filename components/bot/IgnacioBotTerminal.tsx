@@ -12,7 +12,7 @@ import { track } from "@vercel/analytics";
 
 // ─── Suggestion sets ──────────────────────────────────────────────────────────
 
-const DEFAULT_SUGGESTIONS = ["help", "presupuesto", "skills", "compare", "contact"];
+const DEFAULT_SUGGESTIONS = ["caso dayclose", "pregunta sobre Bet365", "presupuesto chatbot", "comparar servicios", "ver proyectos"];
 const FLOW_SUGGESTIONS: Record<number, string[]> = {
   0: ["1", "2", "3", "4"],
   1: ["1", "2", "3"],
@@ -23,7 +23,18 @@ const FLOW_SUGGESTIONS: Record<number, string[]> = {
 
 function getSuggestions(flow: FlowState, explored: Set<string>): string[] {
   if (flow?.name === "quote") return FLOW_SUGGESTIONS[flow.step] ?? ["saltar"];
-  const all = ["help", "presupuesto", "compare", "faq", "skills", "projects", "experience", "contact", "disponibilidad", "roadmap", "caso"];
+  const all = [
+    "caso dayclose",
+    "caso cv analyzer",
+    "pregunta sobre Bet365",
+    "presupuesto chatbot",
+    "comparar servicios",
+    "ver proyectos",
+    "ver habilidades",
+    "disponibilidad",
+    "roadmap",
+    "contacto",
+  ];
   const fresh = all.filter((s) => !explored.has(s));
   return fresh.slice(0, 5).length ? fresh.slice(0, 5) : DEFAULT_SUGGESTIONS;
 }

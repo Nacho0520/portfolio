@@ -80,8 +80,8 @@ const intentSignals: IntentSignal[] = [
   { pattern: /^(availability|disponibilidad|disponible)$/i, command: "availability", weight: 10 },
   { pattern: /^(stack_recommendation|recomienda|stack)$/i, command: "stack_recommendation", weight: 10 },
   // Medium-weight keyword patterns (weight 5)
-  { pattern: /\b(skill|tech|stack|habilidad|herramienta|tecnolog)/i, command: "skills", weight: 5 },
-  { pattern: /\b(project|proyecto|app|web que has|dayclose|lms|cv.analyzer)/i, command: "projects", weight: 5 },
+  { pattern: /\b(skill|tech|stack|habilidad|herramienta|tecnolog|ver habilidades)/i, command: "skills", weight: 5 },
+  { pattern: /\b(project|proyecto|app|web que has|dayclose|lms|cv.analyzer|caso dayclose|caso cv|case study|ver proyectos)/i, command: "projects", weight: 5 },
   { pattern: /\b(experienc|work|trabajo|bet365|concert|piscina|empresa)/i, command: "experience", weight: 5 },
   { pattern: /\b(educ|universi|bachillerato|grado|guadalete|gibraltar)/i, command: "education", weight: 5 },
   { pattern: /\b(about|sobre m[íi]|qui[eé]n eres|bio|te presentas|descr[íi]bete)/i, command: "about", weight: 5 },
@@ -377,6 +377,35 @@ function resolveCaseSector(input: string): CaseData | null {
   return null;
 }
 
+function resolveProject(input: string) {
+  const lower = input.toLowerCase();
+  if (/dayclose|habit|h[aá]bito/.test(lower)) return projects.find((p) => p.id === "dayclose");
+  if (/cv|curriculum|curr[ií]culum|analyzer|analizador|local ai/.test(lower)) return projects.find((p) => p.id === "cv-analyzer");
+  if (/lms|educational|learning|canvas|classroom|aprendizaje/.test(lower)) return projects.find((p) => p.id === "lms");
+  if (/dynamic|website|webs?|sitio|full-stack|fullstack/.test(lower)) return projects.find((p) => p.id === "dynamic-sites");
+  return null;
+}
+
+function projectCaseLines(input: string, locale: Locale): BotLine[] | null {
+  const project = resolveProject(input);
+  if (!project) return null;
+  return [
+    { kind: "system", text: `── ${project.title} · ${t("case study", "caso de estudio", locale)} ──` },
+    { kind: "bot", text: `${t("Problem", "Problema", locale)}: ${project.caseStudy.problem[locale]}` },
+    { kind: "bot", text: `${t("Role", "Rol", locale)}: ${project.caseStudy.role[locale]}` },
+    { kind: "bot", text: `${t("Approach", "Enfoque", locale)}: ${project.caseStudy.approach[locale]}` },
+    { kind: "bot", text: `${t("Impact", "Impacto", locale)}: ${project.caseStudy.impact[locale]}` },
+    sep(),
+    {
+      kind: "bot",
+      text: `${t("Signals", "Señales", locale)}: ${project.metrics
+        .map((m) => `${m.value} ${m.label[locale]}`)
+        .join(" · ")}`,
+    },
+    { kind: "action", text: t("→ Go to Projects section", "→ Ir a Proyectos", locale), action: { type: "scroll", target: "projects" } },
+  ];
+}
+
 // ─── Commands ─────────────────────────────────────────────────────────────────
 
 const COMMANDS: Record<string, (input: string, ctx: BotContext) => RunResult> = {
@@ -420,20 +449,45 @@ const COMMANDS: Record<string, (input: string, ctx: BotContext) => RunResult> = 
     ],
   }),
 
-  projects: (_input, { locale }) => ({
-    lines: [
-      ...projects.map<BotLine>((p) => ({ kind: "bot", text: `• ${p.title} — ${p.short[locale]}` })),
-      sep(),
-      { kind: "action", text: t("→ Go to Projects section", "→ Ir a Proyectos", locale), action: { type: "scroll", target: "projects" } },
-    ],
-  }),
+  projects: (input, { locale }) => {
+    const specificProject = projectCaseLines(input, locale);
+    if (specificProject) return { lines: specificProject };
+
+    return {
+      lines: [
+        { kind: "system", text: t("── Project snapshots ──", "── Resumen de proyectos ──", locale) },
+        ...projects.flatMap<BotLine>((p) => [
+          { kind: "bot", text: `• ${p.title} — ${p.short[locale]}` },
+          {
+            kind: "bot",
+            text: `  ${t("Signals", "Señales", locale)}: ${p.metrics
+              .map((m) => `${m.value} ${m.label[locale]}`)
+              .join(" · ")}`,
+          },
+        ]),
+        sep(),
+        { kind: "bot", text: t("Try: 'caso dayclose' or 'case cv analyzer' for a deeper breakdown.", "Prueba: 'caso dayclose' o 'caso cv analyzer' para ver el desglose.", locale) },
+        { kind: "action", text: t("→ Go to Projects section", "→ Ir a Proyectos", locale), action: { type: "scroll", target: "projects" } },
+      ],
+    };
+  },
 
   experience: (_input, { locale }) => ({
     lines: [
-      ...workTimeline.map<BotLine>((t: TimelineEntry) => ({
-        kind: "bot",
-        text: `• ${t.title[locale]} @ ${t.org} (${t.period[locale]})`,
-      })),
+      ...workTimeline.flatMap<BotLine>((entry: TimelineEntry) => [
+        {
+          kind: "bot",
+          text: `• ${entry.title[locale]} @ ${entry.org} (${entry.period[locale]})`,
+        },
+        ...(entry.metrics
+          ? [{
+              kind: "bot" as const,
+              text: `  ${t("Signals", "Señales", locale)}: ${entry.metrics
+                .map((m) => `${m.value} ${m.label[locale]}`)
+                .join(" · ")}`,
+            }]
+          : []),
+      ]),
       sep(),
       { kind: "action", text: t("→ Go to Experience section", "→ Ir a Experiencia", locale), action: { type: "scroll", target: "experience" } },
     ],

@@ -2,7 +2,22 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Plus, X, Brain, Calendar, GraduationCap, Globe, MonitorPlay } from "lucide-react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  Plus,
+  X,
+  Brain,
+  Calendar,
+  GraduationCap,
+  Globe,
+  MonitorPlay,
+  Crosshair,
+  Fingerprint,
+  Route,
+  Lightbulb,
+  TrendingUp,
+} from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Pill } from "@/components/ui/Pill";
@@ -79,6 +94,13 @@ function ProjectCard({
 }) {
   const d = dictionary.projects;
   const hasDayClosePreview = project.id === "dayclose" && project.livePreview;
+  const caseBlocks = [
+    { key: "problem", icon: Crosshair, text: project.caseStudy.problem[locale] },
+    { key: "role", icon: Fingerprint, text: project.caseStudy.role[locale] },
+    { key: "approach", icon: Route, text: project.caseStudy.approach[locale] },
+    { key: "challenge", icon: Lightbulb, text: project.caseStudy.challenge[locale] },
+    { key: "impact", icon: TrendingUp, text: project.caseStudy.impact[locale] },
+  ] as const;
 
   return (
     <motion.article
@@ -213,9 +235,63 @@ function ProjectCard({
             className="overflow-hidden"
           >
             <div className="flex flex-col gap-5">
-              <div className="rounded-2xl border border-fg-base/5 bg-bg-base/30 p-5 text-sm leading-relaxed text-fg-base/75 md:text-base">
-                {project.long[locale]}
+              <div className="rounded-2xl border border-fg-base/5 bg-bg-base/30 p-5">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-fg-base/55">
+                    {d.caseStudy[locale]}
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.metrics.map((metric) => (
+                      <span
+                        key={`${metric.value}-${metric.label[locale]}`}
+                        className="rounded-full border border-fg-base/10 bg-fg-base/[0.04] px-3 py-1 text-[11px] text-fg-base/70"
+                      >
+                        <strong className="text-fg-base">{metric.value}</strong>{" "}
+                        {metric.label[locale]}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="mb-5 text-sm leading-relaxed text-fg-base/75 md:text-base">
+                  {project.long[locale]}
+                </p>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  {caseBlocks.map((block, blockIndex) => {
+                    const Icon = block.icon;
+                    const label = d[block.key][locale];
+                    return (
+                      <motion.div
+                        key={block.key}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: blockIndex * 0.04 }}
+                        className={cn(
+                          "rounded-2xl border border-fg-base/10 bg-fg-base/[0.035] p-4",
+                          block.key === "impact" && "md:col-span-2",
+                        )}
+                      >
+                        <div className="mb-2 flex items-center gap-2">
+                          <span
+                            className="grid h-7 w-7 place-items-center rounded-lg border border-fg-base/10 bg-bg-base/50"
+                            style={{ color: project.accent }}
+                          >
+                            <Icon className="h-3.5 w-3.5" />
+                          </span>
+                          <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-base/60">
+                            {label}
+                          </h4>
+                        </div>
+                        <p className="text-sm leading-relaxed text-fg-base/70">
+                          {block.text}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
+
               {project.livePreview && (
                 <LivePreview src={project.livePreview} title={project.title} />
               )}
